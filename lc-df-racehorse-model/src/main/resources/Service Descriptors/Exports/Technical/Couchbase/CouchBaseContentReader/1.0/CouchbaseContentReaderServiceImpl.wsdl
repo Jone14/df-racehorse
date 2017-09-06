@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:tns="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:jms="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:jndi="http://www.tibco.com/namespaces/ws/2004/soap/apis/jndi" name="Untitled" targetNamespace="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0">
+            <xs:include schemaLocation="../../../../../../ServiceSchema/Technical/Couchbase/CouchbaseContentReader/1.0/CouchbaseContentReaderService.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="CouchbaseContentReader">
+        <wsdl:port binding="tns:CouchbaseContentReaderPortType10SOAPJMSBinding" name="CouchbaseContentReaderPortType10SOAPJMS">
+            <soap:address location=""/>
+            <jndi:context>
+                <jndi:property name="java.naming.factory.initial" type="java.lang.String">com.tibco.tibjms.naming.TibjmsInitialContextFactory</jndi:property>
+                <jndi:property name="java.naming.provider.url" type="java.lang.String">tibjmsnaming://ldgrvtibemsi001:6660</jndi:property>
+            </jndi:context>
+            <jms:connectionFactory>QueueConnectionFactory</jms:connectionFactory>
+            <jms:targetAddress destination="queue">Ladbrokes.GBR.Service.Private.Request.Technical.Couchbase.CouchbaseContentReader.1</jms:targetAddress>
+        </wsdl:port>
+        <wsdl:port binding="tns:CouchbaseContentReaderPortType10SOAPHTTPBinding" name="CouchbaseContentReaderPortType10SOAPHTTP">
+            <soap:address location="http://localhost:9021/service/technical/couchbase/CouchbaseContentReader/1.0/getContent"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="CouchbaseContentReaderPortType10">
+        <wsdl:operation name="getContent">
+            <wsdl:input message="tns:GetContentRequest"/>
+            <wsdl:output message="tns:GetContentResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CouchbaseContentReaderPortType10SOAPJMSBinding" type="tns:CouchbaseContentReaderPortType10">
+        <soap:binding style="document" transport="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS"/>
+        <jms:binding messageFormat="Text"/>
+        <wsdl:operation name="getContent">
+            <soap:operation soapAction="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0/getContent" style="document"/>
+            <wsdl:input>
+                <soap:body parts="GetContentRequest" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="GetContentResponse" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="CouchbaseContentReaderPortType10SOAPHTTPBinding" type="tns:CouchbaseContentReaderPortType10">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getContent">
+            <soap:operation soapAction="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0/getContent" style="document"/>
+            <wsdl:input>
+                <soap:body parts="GetContentRequest" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="GetContentResponse" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="GetContentRequest">
+        <wsdl:part element="tns:GetContentRequest" name="GetContentRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GetContentResponse">
+        <wsdl:part element="tns:GetContentResponse" name="GetContentResponse"/>
+    </wsdl:message>
+</wsdl:definitions>

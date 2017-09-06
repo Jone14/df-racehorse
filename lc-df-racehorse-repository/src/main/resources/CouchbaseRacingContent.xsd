@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="https://nosql.ladbrokes.com/v1/content/CouchbaseRacingContent.xsd"
+	 xmlns:ccb="https://nosql.ladbrokes.com/v1/content/CouchbaseRacingContent.xsd"
+	 targetNamespace="https://nosql.ladbrokes.com/v1/content/CouchbaseRacingContent.xsd"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="resource" type="ccb:resource"/>
+	<xs:complexType name="resource">
+		<xs:choice minOccurs="0">
+			<xs:element name="HorseMeeting" type="ccb:HorseMeeting"/>
+			<xs:element name="HorseRaceCourse" type="ccb:HorseRaceCourse"/>
+			<xs:element name="HorseRace" type="ccb:HorseRace"/>
+			<xs:element name="HorseRaceRunner" type="ccb:HorseRaceRunner"/>
+			<xs:element name="Horse" type="ccb:Horse"/>
+			<xs:element name="Jockey" type="ccb:Jockey"/>
+			<xs:element name="Trainer" type="ccb:Trainer"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="HorseMeeting" type="ccb:HorseMeeting"/>
+	<xs:complexType name="HorseMeeting">
+		<xs:sequence>
+			<xs:element name="countryCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="course" type="xs:string" minOccurs="0"/>
+			<xs:element name="drawcomment" type="xs:string" minOccurs="0"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="isAbandoned" type="xs:string" minOccurs="0"/>
+			<xs:element name="locale" type="xs:string" minOccurs="0"/>
+			<xs:element name="isIrish" type="xs:string" minOccurs="0"/>
+			<xs:element name="meetingDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="meetingKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="meetingName" type="xs:string" minOccurs="0"/>
+			<xs:element name="numberOfRaces" type="xs:string" minOccurs="0"/>
+			<xs:element name="officialGoingDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="officialGoingShortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="shortdrawcomment" type="xs:string" minOccurs="0"/>
+			<xs:element name="tvChannel" type="xs:string" minOccurs="0"/>
+			<xs:element name="courses" type="ccb:meetingCourses" minOccurs="0"/>
+			<xs:element name="OpenBetTypeIds" type="ccb:openBetTypeIds" minOccurs="0"/>
+			<xs:element name="races" type="ccb:meetingRaces" minOccurs="0"/>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="HorseRaceCourse" type="ccb:HorseRaceCourse"/>
+	<xs:complexType name="HorseRaceCourse">
+		<xs:sequence>
+			<xs:element name="admissionFees" type="xs:string" minOccurs="0"/>
+			<xs:element name="admissionRestrictions" type="xs:string" minOccurs="0"/>
+			<xs:element name="childrenFacilities" type="xs:string" minOccurs="0"/>
+			<xs:element name="clerkOfCourse" type="xs:string" minOccurs="0"/>
+			<xs:element name="clerkOfScales" type="xs:string" minOccurs="0"/>
+			<xs:element name="courseKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="courseName" type="xs:string" minOccurs="0"/>
+			<xs:element name="countryCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="clerkOfCourseAddress" type="xs:string" minOccurs="0"/>
+			<xs:element name="directionFlag" type="xs:string" minOccurs="0"/>
+			<xs:element name="disabledFacilities" type="xs:string" minOccurs="0"/>
+			<xs:element name="flat_description" type="xs:string" minOccurs="0"/>
+			<xs:element name="industryCID" type="xs:string" minOccurs="0"/>
+			<xs:element name="judge" type="xs:string" minOccurs="0"/>
+			<xs:element name="jumpDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="locale" type="xs:string" minOccurs="0"/>
+			<xs:element name="location" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="directions" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="directions" type="xs:string" minOccurs="0"/>
+									<xs:element name="transportType" type="xs:string" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="unformattedAddress" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parkingDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="phone" type="xs:string" minOccurs="0"/>
+			<xs:element name="starter" type="xs:string" minOccurs="0"/>
+			<xs:element name="steward" type="xs:string" minOccurs="0"/>
+			<xs:element name="stewardsSecretary" type="xs:string" minOccurs="0"/>
+			<xs:element name="meetings" type="ccb:courseMeetings" minOccurs="0"/>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="HorseRace" type="ccb:HorseRace"/>
+	<xs:complexType name="HorseRace">
+		<xs:sequence>
+			<xs:element name="abandonReason" type="xs:string" minOccurs="0"/>
+			<xs:element name="ageAllowed" type="xs:string" minOccurs="0"/>
+			<xs:element name="animalType" type="xs:string" minOccurs="0"/>
+			<xs:element name="ageLimitation" type="xs:string" minOccurs="0"/>
+			<xs:element name="betting" type="xs:string" minOccurs="0"/>
+			<xs:element name="crsgraphicFileName" type="xs:string" minOccurs="0"/>
+			<xs:element name="diomedComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="distanceYards" type="xs:string" minOccurs="0"/>
+			<xs:element name="OpenBetEventId" type="xs:string" minOccurs="0"/>
+			<xs:element name="OpenBetTypeId" type="xs:string" minOccurs="0"/>
+			<xs:element name="flatOrJumps" type="xs:string" minOccurs="0"/>
+			<xs:element name="goingAllowance" type="xs:string" minOccurs="0"/>
+			<xs:element name="goingDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="goingShortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="grade" type="xs:string" minOccurs="0"/>
+			<xs:element name="handicapRatingBandFrom" type="xs:string" minOccurs="0"/>
+			<xs:element name="handicapRatingBandTo" type="xs:string" minOccurs="0"/>
+			<xs:element name="handicapType" type="xs:string" minOccurs="0"/>
+			<xs:element name="isAbandoned" type="xs:string" minOccurs="0"/>
+			<xs:element name="isAllWeather" type="xs:string" minOccurs="0"/>
+			<xs:element name="isHandicap" type="xs:string" minOccurs="0"/>
+			<xs:element name="isoCurrencyCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="isOpenAgeRace" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastYrsWinnerName" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastYrsWeight" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastYrsOdds" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastYrsRunners" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastYrsDraw" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastyear" type="xs:string" minOccurs="0"/>
+			<xs:element name="locale" type="xs:string" minOccurs="0"/>
+			<xs:element name="longHandicap" type="xs:string" minOccurs="0"/>
+			<xs:element name="trackfences" type="xs:string" minOccurs="0"/>
+			<xs:element name="tvChannel" type="xs:string" minOccurs="0"/>
+			<xs:element name="totalStartingPrice" type="xs:string" minOccurs="0"/>
+			<xs:element name="distance" type="xs:string" minOccurs="0"/>
+			<xs:element name="thoroughbredRaceNo" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceTime24Hr" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceValue" type="xs:string" minOccurs="0"/>
+			<xs:element name="minimumWeight" type="xs:string" minOccurs="0"/>
+			<xs:element name="minimumWeight3yrOld" type="xs:string" minOccurs="0"/>
+			<xs:element name="noOfFences" type="xs:string" minOccurs="0"/>
+			<xs:element name="offTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="pattern" type="xs:string" minOccurs="0"/>
+			<xs:element name="seller" type="xs:string" minOccurs="0"/>
+			<xs:element name="startTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="weightsRaised" type="xs:string" minOccurs="0"/>
+			<xs:element name="prizes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Prize" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PrizeMoney" type="xs:string" minOccurs="0"/>
+									<xs:element name="PrizeName" type="xs:string" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="raceClass" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceName" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceStartedTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceTitle" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceType" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="raceTypeDescription" type="xs:string" minOccurs="0"/>
+						<xs:element name="raceTypeShortCode" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="racingPostStandardTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="runnerCount" type="xs:string" minOccurs="0"/>
+			<xs:element name="sellingDetails" type="xs:string" minOccurs="0"/>
+			<xs:element name="stallPosition" type="xs:string" minOccurs="0"/>
+			<xs:element name="tote" type="xs:string" minOccurs="0"/>
+			<xs:element name="toteSwinger" type="xs:string" minOccurs="0"/>
+			<xs:element name="verdict" type="xs:string" minOccurs="0"/>
+			<xs:element name="winnerTimeSecs" type="xs:string" minOccurs="0"/>
+			<xs:element name="runner" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="nonrunner" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="tips" type="ccb:tipsType" minOccurs="0"/>
+			<xs:element name="trends" type="ccb:trendsType" minOccurs="0"/>
+			<xs:element name="meeting" type="xs:string" minOccurs="0"/>
+			<xs:element name="course" type="xs:string" minOccurs="0"/>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="HorseRaceRunner" type="ccb:HorseRaceRunner"/>
+	<xs:complexType name="HorseRaceRunner">
+		<xs:sequence>
+			<xs:element name="adjustedMasterRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="allowance" type="xs:string" minOccurs="0"/>
+			<xs:element name="awWinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="comment" type="xs:string" minOccurs="0"/>
+			<xs:element name="commentInRun" type="xs:string" minOccurs="0"/>
+			<xs:element name="courseDistanceWinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="daysSinceLastRun" type="xs:string" minOccurs="0"/>
+			<xs:element name="distanceBehindWinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="drawNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="favouritePosition" type="xs:string" minOccurs="0"/>
+			<xs:element name="finalPosition" type="xs:string" minOccurs="0"/>
+			<xs:element name="forecastSP" type="xs:string" minOccurs="0"/>
+			<xs:element name="goingWon" type="xs:string" minOccurs="0"/>
+			<xs:element name="headGearFirstTimeIndicator" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="headgearDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="headgearShortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="horseAge" type="xs:string" minOccurs="0"/>
+			<xs:element name="highestSpeedRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="horseWon" type="xs:string" minOccurs="0"/>
+			<xs:element name="isBeatenFavourite" type="xs:string" minOccurs="0"/>
+			<xs:element name="isFavourite" type="xs:string" minOccurs="0"/>
+			<xs:element name="isReservedRunner" type="xs:string" minOccurs="0"/>
+			<xs:element name="isPastCourseWinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="isPastDistancWinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="ispastcourseanddistancewinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="jockeyClubRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="ksweight" type="xs:string" minOccurs="0"/>
+			<xs:element name="lane" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastRFNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="locale" type="xs:string" minOccurs="0"/>
+			<xs:element name="nonFinishReason" type="xs:string" minOccurs="0"/>
+			<xs:element name="overWeightLbs" type="xs:string" minOccurs="0"/>
+			<xs:element name="penaltyWeightLbs" type="xs:string" minOccurs="0"/>
+			<xs:element name="pastPostPosition" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceWinner" type="xs:string" minOccurs="0"/>
+			<xs:element name="racingPostRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="racingPostSpeedFigure" type="xs:string" minOccurs="0"/>
+			<xs:element name="runnerKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="runnerName" type="xs:string" minOccurs="0"/>
+			<xs:element name="saddleClothNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="silkImageName" type="xs:string" minOccurs="0"/>
+			<xs:element name="status" type="xs:string" minOccurs="0"/>
+			<xs:element name="trapNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="toWinNumPrice" type="xs:string" minOccurs="0"/>
+			<xs:element name="toWinDecPrice" type="xs:string" minOccurs="0"/>
+			<xs:element name="unAdjustedMasterRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="weightLbs" type="xs:string" minOccurs="0"/>
+			<xs:element name="weight" type="xs:string" minOccurs="0"/>
+			<xs:element name="topSpeed" type="xs:string" minOccurs="0"/>
+			<xs:element name="jockey" type="xs:string" minOccurs="0"/>
+			<xs:element name="formFigs" type="xs:string" minOccurs="0"/>
+			<xs:element name="horse" type="xs:string" minOccurs="0"/>
+			<xs:element name="race" type="xs:string" minOccurs="0"/>
+			<xs:element name="meeting" type="xs:string" minOccurs="0"/>
+			<xs:element name="course" type="xs:string" minOccurs="0"/>
+			<xs:element name="trainer" type="xs:string" minOccurs="0"/>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Horse" type="ccb:Horse"/>
+	<xs:complexType name="Horse">
+		<xs:sequence>
+			<xs:element name="age" type="xs:string" minOccurs="0"/>
+			<xs:element name="averageWinDistance" type="xs:string" minOccurs="0"/>
+			<xs:element name="blinkers" type="xs:string" minOccurs="0"/>
+			<xs:element name="breeder" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="breederKey" type="xs:string" minOccurs="0"/>
+						<xs:element name="breederName" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="colourDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="colourShortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="dam" type="xs:string" minOccurs="0"/>
+			<xs:element name="damSireAvgWinDist" type="xs:string" minOccurs="0"/>
+			<xs:element name="dateOfDeath" type="xs:string" minOccurs="0"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="diomedComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="foalDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="geldedDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="horseKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="horseName" type="xs:string" minOccurs="0"/>
+			<xs:element name="horseSuffix" type="xs:string" minOccurs="0"/>
+			<xs:element name="horseType" type="xs:string" minOccurs="0"/>
+			<xs:element name="locale" type="xs:string" minOccurs="0"/>
+			<xs:element name="masterAllWeatherRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="masterBumperRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="masterChaseRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="masterFlatRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="masterHurdleRatin" type="xs:string" minOccurs="0"/>
+			<xs:element name="officialBHBRating" type="xs:string" minOccurs="0"/>
+			<xs:element name="racingPOstBreedingComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="racingPostSireComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="racingPostSpotlightComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="sexDescription" type="xs:string" minOccurs="0"/>
+			<xs:element name="sexShortCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="sireId" type="xs:string" minOccurs="0"/>
+			<xs:element name="sireAverageWinDistance" type="xs:string" minOccurs="0"/>
+			<xs:element name="sireName" type="xs:string" minOccurs="0"/>
+			<xs:element name="damId" type="xs:string" minOccurs="0"/>
+			<xs:element name="damName" type="xs:string" minOccurs="0"/>
+			<xs:element name="stable" type="xs:string" minOccurs="0"/>
+			<xs:element name="startTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="audioUrl" type="xs:string" minOccurs="0"/>
+			<xs:element name="isBEGS" type="xs:string" minOccurs="0"/>
+			<xs:element name="isBAGS" type="xs:string" minOccurs="0"/>
+			<xs:element name="handicapType" type="xs:string" minOccurs="0"/>
+			<xs:element name="thoroughbredRaceNo" type="xs:string" minOccurs="0"/>
+			<xs:element name="tvChannel" type="xs:string" minOccurs="0"/>
+			<xs:element name="raceDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="dressCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="trainers" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="initials" type="xs:string" minOccurs="0"/>
+						<xs:element name="trainerKey" type="xs:string" minOccurs="0"/>
+						<xs:element name="isCurrentTrainer" type="xs:string" minOccurs="0"/>
+						<xs:element name="trainerName" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="owners" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="isCurrentOwner" type="xs:string" minOccurs="0"/>
+						<xs:element name="ownerName" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="form" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="raceKey" type="xs:string" minOccurs="0"/>
+						<xs:element name="date" type="xs:string" minOccurs="0"/>
+						<xs:element name="course" type="xs:string" minOccurs="0"/>
+						<xs:element name="abbrevcrs" type="xs:string" minOccurs="0"/>
+						<xs:element name="weight" type="xs:string" minOccurs="0"/>
+						<xs:element name="weightLbs" type="xs:string" minOccurs="0"/>
+						<xs:element name="aids" type="xs:string" minOccurs="0"/>
+						<xs:element name="position" type="xs:string" minOccurs="0"/>
+						<xs:element name="jockey" type="xs:string" minOccurs="0"/>
+						<xs:element name="officialRating" type="xs:string" minOccurs="0"/>
+						<xs:element name="topSpeed" type="xs:string" minOccurs="0"/>
+						<xs:element name="rpr" type="xs:string" minOccurs="0"/>
+						<xs:element name="conditions" type="xs:string" minOccurs="0"/>
+						<xs:element name="raceOutcome" type="xs:string" minOccurs="0"/>
+						<xs:element name="courseKey" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Jockey" type="ccb:Jockey"/>
+	<xs:complexType name="Jockey">
+		<xs:sequence>
+			<xs:element name="isReplacement" type="xs:string" minOccurs="0"/>
+			<xs:element name="jockeyCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="jockeyname" type="xs:string" minOccurs="0"/>
+			<xs:element name="jockeyKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="locale" type="xs:string" minOccurs="0"/>
+			<xs:element name="number" type="xs:string" minOccurs="0"/>
+			<xs:element name="silkCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="silkName" type="xs:string" minOccurs="0"/>
+			<xs:element name="silkURL" type="xs:string" minOccurs="0"/>
+			<xs:element name="statistics" type="ccb:jockeyStatisticsType" minOccurs="0"/>
+			<xs:element name="runner" type="xs:string" minOccurs="0"/>
+			<xs:element name="wightAllowanceLbs" type="xs:string" minOccurs="0"/>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="parentType">
+		<xs:sequence>
+			<xs:element name="element" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tipsType">
+		<xs:sequence>
+			<xs:element name="tip" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="newspaper" type="xs:string" minOccurs="0"/>
+						<xs:element name="tipster" type="xs:string" minOccurs="0"/>
+						<xs:element name="tipCount" type="xs:string" minOccurs="0"/>
+						<xs:element name="selection" type="xs:string" minOccurs="0"/>
+						<xs:element name="selection_uid" type="xs:string" minOccurs="0"/>
+						<xs:element name="flag" type="xs:string" minOccurs="0"/>
+						<xs:element name="rpTip" type="xs:boolean" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="trendsType">
+		<xs:sequence>
+			<xs:element name="trend" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="weightLbs" type="xs:string" minOccurs="0"/>
+						<xs:element name="weight" type="xs:string" minOccurs="0"/>
+						<xs:element name="year" type="xs:string" minOccurs="0"/>
+						<xs:element name="topSpeed" type="xs:string" minOccurs="0"/>
+						<xs:element name="racingPostRating" type="xs:string" minOccurs="0"/>
+						<xs:element name="draw" type="xs:string" minOccurs="0"/>
+						<xs:element name="age" type="xs:string" minOccurs="0"/>
+						<xs:element name="jockeyName" type="xs:string" minOccurs="0"/>
+						<xs:element name="trainerName" type="xs:string" minOccurs="0"/>
+						<xs:element name="winner" type="xs:string" minOccurs="0"/>
+						<xs:element name="toWinNumPrice" type="xs:integer" minOccurs="0"/>
+						<xs:element name="toWinDecPrice" type="xs:integer" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="jockeyStatisticsType">
+		<xs:sequence>
+			<xs:element name="weight" type="xs:string" minOccurs="0"/>
+			<xs:element name="apprentice" type="xs:string" minOccurs="0"/>
+			<xs:element name="course" type="xs:string" minOccurs="0"/>
+			<xs:element name="todaysRides" type="xs:string" minOccurs="0"/>
+			<xs:element name="seasWinFlat" type="xs:string" minOccurs="0"/>
+			<xs:element name="seasRunsFlat" type="xs:string" minOccurs="0"/>
+			<xs:element name="seasWinJump" type="xs:string" minOccurs="0"/>
+			<xs:element name="seasRunsJump" type="xs:string" minOccurs="0"/>
+			<xs:element name="daysSinceWin" type="xs:string" minOccurs="0"/>
+			<xs:element name="runsSinceWin" type="xs:string" minOccurs="0"/>
+			<xs:element name="percJump" type="xs:string" minOccurs="0"/>
+			<xs:element name="percFlat" type="xs:string" minOccurs="0"/>
+			<xs:element name="dateTime" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="reportType">
+		<xs:sequence>
+			<xs:element name="creationDateTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastUpdatedDateTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="count" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="meetingCourses">
+		<xs:sequence>
+			<xs:element name="courseID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="courseMeetings">
+		<xs:choice>
+			<xs:element name="meetingID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="openBetTypeIds">
+		<xs:choice>
+			<xs:element name="OpenBetTypeId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="meetingRaces">
+		<xs:sequence>
+			<xs:element name="raceID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Trainer" type="ccb:Trainer"/>
+	<xs:complexType name="Trainer">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+			<xs:element name="trainerKey" type="xs:string" minOccurs="0"/>
+			<xs:element name="course" type="xs:string" minOccurs="0"/>
+			<xs:element name="todaysRides" type="xs:string" minOccurs="0"/>
+			<xs:element name="runs14" type="xs:string" minOccurs="0"/>
+			<xs:element name="wins14" type="xs:string" minOccurs="0"/>
+			<xs:element name="places14" type="xs:string" minOccurs="0"/>
+			<xs:element name="daysSinceWinFlat" type="xs:string" minOccurs="0"/>
+			<xs:element name="runsSinceWinFlat" type="xs:string" minOccurs="0"/>
+			<xs:element name="daysSinceWinJump" type="xs:string" minOccurs="0"/>
+			<xs:element name="runsSinceWinJump" type="xs:string" minOccurs="0"/>
+			<xs:element name="report" type="ccb:reportType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

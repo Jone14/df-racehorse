@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema targetNamespace="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0" xmlns:ccr="http://services.ladbrokes.co.uk/service/technical/couchbase/CouchbaseContentReader/1.0" xmlns:sbk="http://cdm.ladbrokes.co.uk/product/Sportsbook/2.0" xmlns:cmnMsg="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" xmlns:vdc="http://cdm.ladbrokes.co.uk/content/VideoContent/2.0">
+	<xs:import namespace="http://cdm.ladbrokes.co.uk/content/VideoContent/2.0" schemaLocation="../../../../../CDM/VideoContent/2.0/VideoContent.xsd"/>
+	<xs:import namespace="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" schemaLocation="../../../../../CDM/CommonMessage/2.0/CommonMessage.xsd"/>
+	<xs:import namespace="http://cdm.ladbrokes.co.uk/product/Sportsbook/2.0" schemaLocation="../../../../../CDM/Sportsbook/2.0/Sportsbook.xsd"/>
+<xs:element name="GetHorseRaceResultsRequest" type="GetHorseRaceResultsRequest"/>
+	<xs:complexType name="GetHorseRaceResultsRequest">
+		<xs:sequence>
+			<xs:element name="eventKey" type="sbk:SportsbookEvent" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+<xs:element name="GetAvailableVideoStreamRequest" type="GetAvailableVideoStreamRequest"/>
+	<xs:complexType name="GetAvailableVideoStreamRequest">
+		<xs:sequence>
+		<xs:element name="videoStream" type="vdc:VideoStream" minOccurs="0" maxOccurs="unbounded"/>		
+		</xs:sequence>
+		</xs:complexType>
+<xs:element name="GetAvailableVisualisationRequest" type="GetAvailableVisualisationRequest"/>
+	<xs:complexType name="GetAvailableVisualisationRequest">
+		<xs:sequence>
+			<xs:element name="visualisationContentKey" type="vdc:VideoStream" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+<xs:element name="GetAvailableVisualisationResponse" type="GetAvailableVisualisationResponse"/>
+	<xs:complexType name="GetAvailableVisualisationResponse">
+		<xs:sequence>
+			<xs:element name="visualisationEventList" type="vdc:VideoStream" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetHorseRaceResultsResponse" type="GetHorseRaceResultsResponse"/>
+	<xs:complexType name="GetHorseRaceResultsResponse">
+		<xs:sequence>
+			<xs:element name="raceMeeting" type="sbk:RaceMeeting" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetRaceCardRequest" type="GetRaceCardRequest"/>
+	<xs:complexType name="GetRaceCardRequest">
+		<xs:sequence>
+			<xs:element name="eventKey" type="sbk:SportsbookEvent" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>	
+	<xs:element name="GetRaceCardResponse" type="GetRaceCardResponse"/>
+	<xs:complexType name="GetRaceCardResponse">
+		<xs:sequence>
+			<xs:element name="race" type="sbk:Race" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAvailableVideoStreamResponse" type="GetAvailableVideoStreamResponse"/>
+	<xs:complexType name="GetAvailableVideoStreamResponse">
+		<xs:sequence>
+			<xs:element name="videoStreamEventList" type="vdc:VideoStream" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="GetTipsRequest" type="GetTipsRequest"/>
+	<xs:complexType name="GetTipsRequest">
+		<xs:sequence>
+			<xs:element name="eventKey" type="sbk:SportsbookEvent" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+	</xs:complexType>
+<xs:element name="GetTipsResponse" type="GetTipsResponse"/>
+<xs:complexType name="GetTipsResponse">
+		<xs:sequence>
+			<xs:element name="race" type="sbk:Race" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:element name="GetContentRequest" type="GetContentRequest"/>
+	<xs:complexType name="GetContentRequest">
+		<xs:complexContent>
+			<xs:extension base="cmnMsg:GetRequest">
+				<xs:sequence>
+					<xs:element name="getAvailableVideoStreamRequest" type="GetAvailableVideoStreamRequest" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getAvailableVisualisationRequest" type="GetAvailableVisualisationRequest" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getHorseRaceResultsRequest" type="GetHorseRaceResultsRequest" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getTipsRequest" type="GetTipsRequest" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getRaceCardRequest" type="GetRaceCardRequest" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetContentResponse" type="GetContentResponse"/>
+	<xs:complexType name="GetContentResponse">
+		<xs:complexContent>
+			<xs:extension base="cmnMsg:GetResponse">
+				<xs:sequence>
+					<xs:element name="getAvailableVideoStreamResponse" type="GetAvailableVideoStreamResponse" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getHorseRaceResultResponse" type="GetHorseRaceResultsResponse" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getRaceCardResponse" type="GetRaceCardResponse" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getTipsResponse" type="GetTipsResponse" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="getAvailableVisualisationResponse" type="GetAvailableVisualisationResponse" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+</xs:schema>

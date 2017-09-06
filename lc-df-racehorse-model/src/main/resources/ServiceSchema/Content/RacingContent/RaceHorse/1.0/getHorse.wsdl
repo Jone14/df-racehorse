@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0" targetNamespace="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0">
+  <wsdl:types>
+    <xs:schema xmlns="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0" xmlns:cmnMsg="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" xmlns:hrc="http://cdm.ladbrokes.co.uk/content/RacingContent/1.0" xmlns:rch="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0">
+	<xs:import namespace="http://cdm.ladbrokes.co.uk/content/RacingContent/1.0" schemaLocation="../../../../../CDM/RacingContent/1.0/RacingContent.xsd"/>
+	<xs:import namespace="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" schemaLocation="../../../../../CDM/CommonMessage/2.0/CommonMessage.xsd"/>
+	<xs:element name="ArrayOfHorse" type="rch:ArrayOfHorse"/>
+	<xs:complexType name="ArrayOfHorse">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="horse" type="hrc:Horse"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetHorseRequest">
+	<xs:complexType>
+		<xs:complexContent>
+			<xs:extension base="cmnMsg:GetRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="includeForm" type="xs:boolean"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="horse" type="hrc:Horse"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	</xs:element>
+	<xs:element name="GetHorseResponse">
+	<xs:complexType>
+		<xs:complexContent>
+			<xs:extension base="cmnMsg:GetResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="horses" type="rch:ArrayOfHorse"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	</xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetHorseRequest">
+    <wsdl:part element="tns:GetHorseRequest" name="GetHorseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetHorseResponse">
+    <wsdl:part element="tns:GetHorseResponse" name="GetHorseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RaceHorsePortType10">
+    <wsdl:operation name="GetHorse">
+      <wsdl:input message="tns:GetHorseRequest" name="GetHorseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetHorseResponse" name="GetHorseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RaceHorsePortType10Soap11" type="tns:RaceHorsePortType10">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetHorse">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetHorseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetHorseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RaceHorsePortType10Service">
+    <wsdl:port binding="tns:RaceHorsePortType10Soap11" name="RaceHorsePortType10Soap11">
+      <soap:address location="http://127.0.0.1:6161/racingcontent"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:tns="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:jms="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:jndi="http://www.tibco.com/namespaces/ws/2004/soap/apis/jndi" targetNamespace="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0">
+            <xs:include schemaLocation="../../../../../../ServiceSchema/Utility/Error/ErrorLogger/2.0/ErrorLoggerService.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="ErrorLoggerPortType20">
+        <wsdl:port binding="tns:ErrorLoggerSOAPHTTPBinding" name="ErrorLoggerSOAPHTTP">
+            <soap:address location="http://localhost:5678/service/utility/error/ErrorLogger/2.0"/>
+        </wsdl:port>
+        <wsdl:port binding="tns:ErrorLoggerSOAPJMSBinding" name="ErrorLoggerSOAPJMS">
+            <soap:address location=""/>
+            <jndi:context>
+                <jndi:property name="java.naming.factory.initial" type="java.lang.String">com.tibco.tibjms.naming.TibjmsInitialContextFactory</jndi:property>
+                <jndi:property name="java.naming.provider.url" type="java.lang.String">tibjmsnaming://localhost:7222</jndi:property>
+            </jndi:context>
+            <jms:connectionFactory>QueueConnectionFactory</jms:connectionFactory>
+            <jms:targetAddress destination="queue">Ladbrokes.GBR.Service.Public.Notify.Utility.Error.ErrorLogger.2</jms:targetAddress>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="ErrorLoggerPortType20">
+        <wsdl:operation name="notifyErrorLogger">
+            <wsdl:input message="tns:NotifyErrorLoggerRequest"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ErrorLoggerSOAPHTTPBinding" type="tns:ErrorLoggerPortType20">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="notifyErrorLogger">
+            <soap:operation soapAction="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0/notifyErrorLogger" style="document"/>
+            <wsdl:input>
+                <soap:body parts="NotifyErrorLoggerRequest" use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ErrorLoggerSOAPJMSBinding" type="tns:ErrorLoggerPortType20">
+        <soap:binding style="document" transport="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS"/>
+        <jms:binding messageFormat="Text"/>
+        <wsdl:operation name="notifyErrorLogger">
+            <soap:operation soapAction="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0/notifyErrorLogger" style="document"/>
+            <wsdl:input>
+                <soap:body parts="NotifyErrorLoggerRequest" use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="NotifyErrorLoggerRequest">
+        <wsdl:part element="tns:NotifyErrorLoggerRequest" name="NotifyErrorLoggerRequest"/>
+    </wsdl:message>
+</wsdl:definitions>

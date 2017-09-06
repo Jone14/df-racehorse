@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0" xmlns:tns="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0">
+    <import location="../../../../../../ServiceSchema/Content/RacingContent/RaceHorse/1.0/RaceHorseService.xsd" namespace="http://services.ladbrokes.co.uk/service/content/racingcontent/RaceHorse/1.0"/>
+    <message name="GetHorseRequest">
+        <part element="ns:GetHorseRequest" name="GetHorseRequest"/>
+    </message>
+    <message name="GetHorseResponse">
+        <part element="ns:GetHorseResponse" name="GetHorseResponse"/>
+    </message>
+    <portType name="RaceHorsePortType10">
+        <operation name="getHorse">
+            <input message="tns:GetHorseRequest" name="GetHorseRequest"/>
+            <output message="tns:GetHorseResponse" name="GetHorseResponse"/>
+        </operation>
+    </portType>
+</definitions>

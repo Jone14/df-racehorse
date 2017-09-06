@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://cdm.ladbrokes.co.uk/common/Audit/2.0"
+	 xmlns:aud="http://cdm.ladbrokes.co.uk/common/Audit/2.0"
+	 xmlns:cmnMsg="http://services.ladbrokes.co.uk/service/CommonMessage/2.0"
+	 targetNamespace="http://cdm.ladbrokes.co.uk/common/Audit/2.0"
+	 version="2.0"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" schemaLocation="../../CommonMessage/2.0/CommonMessage.xsd"/>
+	<xs:element name="Audit" type="aud:Audit"/>
+	<xs:complexType name="Audit">
+		<xs:sequence>
+			<xs:element name="auditTime" type="xs:dateTime"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The current time when the audit event occurred</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="transactionId" type="xs:string"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This would be the same as the client transaction ID from the request or response header</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="correlationId" type="xs:string"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This will be any other type of correlation ID like the errorTransactionId, or client token or sub_system_id or any other type of relevant IDs that can be relevant in a report even if the persistent type is shallow, if applicable </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceName" type="xs:string"  minOccurs="0"/>
+			<xs:element name="operationName" type="xs:string"  minOccurs="0"/>
+			<xs:element name="status" type="xs:string"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This will be the serviceStatus of the Response message of relevant status of the message being transmitted</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="transmission" type="aud:TransmissionTypeKind"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This would be either "Request", "Response", "Callback" or "Notification". It indicates the types of transmission response that the request is for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="persistence" type="aud:PersistenceTypeKind"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This should be of the types "Deep", "Normal" or "Shallow". "Shallow" will allow only the mandatory Audit elements to be persisted, "Normal" will allow both the Audit and Request or Response headers to be persisted, while "Deep" will allow all including payloads to be persisted. Default is normal.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="property" type="cmnMsg:NameValuePair" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TransmissionTypeKind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Request">
+				<xs:annotation>
+					<xs:documentation>This is an async or sync request invocation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Response">
+				<xs:annotation>
+					<xs:documentation>This is the response to a sync or async request</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CallBack">
+				<xs:annotation>
+					<xs:documentation>This is a Call Back message being received by a Middleware service that has previously invoked an Async request</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Notification">
+				<xs:annotation>
+					<xs:documentation>This is a Notification message being send from a Middleware service to a client that has previously invoked async request</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PersistenceTypeKind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Shallow">
+				<xs:annotation>
+					<xs:documentation>This will allow only the Audit elements details to be persisted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Normal">
+				<xs:annotation>
+					<xs:documentation>This will allow both the header and the Request or Response Headers to be persisted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Deep">
+				<xs:annotation>
+					<xs:documentation>This will allow all details including payload to be persisted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

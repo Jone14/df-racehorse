@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<xs:schema xmlns="http://cdm.ladbrokes.co.uk/common/Error/2.0" xmlns:cmnMsg="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" xmlns:err="http://cdm.ladbrokes.co.uk/common/Error/2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://cdm.ladbrokes.co.uk/common/Error/2.0">
+	<xs:import namespace="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" schemaLocation="../../CommonMessage/2.0/CommonMessage.xsd"/>
+	<xs:simpleType name="ActionTypeKind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Retry"/>
+			<xs:enumeration value="AlertSMS"/>
+			<xs:enumeration value="AlertEmail"/>
+			<xs:enumeration value="InvokeOperation"/>
+			<xs:enumeration value="ExecuteScript"/>
+			<xs:enumeration value="NotifyService"/>
+			<xs:enumeration value="TriggerEvent"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ActionDetail" type="ActionDetail"/>
+	<xs:complexType name="ActionDetail">
+		<xs:annotation>
+			<xs:documentation>This class represents the detail of an ActionItem</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="instance"  type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The instance of this particular action, for a "Retry" this will be the number of retry attempts already executed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="maxInstance"  type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The maximum number of instance for this action, for a "Retry" this will be the maximum number of retry attempts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="soapAction"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>useful for Retry and Service invocation Actions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="requestDestination"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This will be the EMS Queue, or HTTP URL, or SMS number, or email Address, or script file destination, that might be appropriate for the action</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="requestType"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This should indicate whether the destination is to a Topic or a Queue, If url is HTTP or HTTPS, If script to execute is a shell or application scripts etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="statusChangeDatetime"  type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The datetime when the action status was updated or changed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="extraInfo"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Any extra detail that might be unique to any particular handler</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="delay"  type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The number of seconds delay before action is executed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="actionParam" type="cmnMsg:NameValuePair"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ErrorProperties" type="ErrorProperties"/>
+	<xs:complexType name="ErrorProperties">
+		<xs:annotation>
+			<xs:documentation>This class represents the error properties as set by the error generator (e.g. Hybris).  Various properties are set, and the handlers will 'listen' to errors that match their criteria.
+
+e.g. a 'namespace' handler will look at 'serviceIdentifier' attribute for a namespace that matches the ones they are meant to handle.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="errorDateTime"  type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The date and time the error was captured</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="transactionId"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The client supplied transaction id, if one was provided.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="correlationId"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>TBD?  message level correlation id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="serviceIdentifier"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The namespace of the service that failed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="operationName"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The name of the operation on the above service that failed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="suppressFlag"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>[True or false] indicate If this Log message can be suppressed by not being inserted into the database</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="suppressInterval"  type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The length of time in seconds that this particular error code will be suppressed for, before new ones will be allowed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="numActionItems"  type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The total number of ActionItems to action as a result of this error.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="numClosedActionItems"  type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>The number of ActionItems that have been closed / actioned. e.g. Completed, Cancelled, Failed - for this service error.  
+
+That is, the number that have been addressed in some way, and there is nothing else to do.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="serviceError" type="cmnMsg:ServiceError"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="actionItem" type="ActionItem"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ActionStatusKind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="New">
+				<xs:annotation>
+					<xs:documentation>This is a newly created error event instance, and no action has been executed on it yet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ready">
+				<xs:annotation>
+					<xs:documentation>Action execution is ready to be handled by a xxxHandler service</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Running">
+				<xs:annotation>
+					<xs:documentation>Action execution is currently running</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Failed">
+				<xs:annotation>
+					<xs:documentation>The error event handler failed to commence the execution of this action or didn't complete the execution because of an issue. see action message for details</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Completed">
+				<xs:annotation>
+					<xs:documentation>The action was executed and completed successfully</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pending">
+				<xs:annotation>
+					<xs:documentation>The action is pending execution</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Cancelled">
+				<xs:annotation>
+					<xs:documentation>The action is cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ActionItem" type="ActionItem"/>
+	<xs:complexType name="ActionItem">
+		<xs:annotation>
+			<xs:documentation>This class represents an ActionItem to be addressed by a handler.
+
+A single error can have many actionItems to be handled.
+
+e.g. AlertEmail and InvokeService would mean 2 ActionItems, one for each action to do.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="actionType"  type="ActionTypeKind">
+				<xs:annotation>
+					<xs:documentation>The type of action this ActionItem requires.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="actionStatus"  type="ActionStatusKind">
+				<xs:annotation>
+					<xs:documentation>The status of action this ActionItem requires.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="actionComment"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Any comments added to aid human intervention</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="handlerType"  type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The type of Handler to handle this item.
+
+e.g. 'namespace' handler type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="actionDetail" type="ActionDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

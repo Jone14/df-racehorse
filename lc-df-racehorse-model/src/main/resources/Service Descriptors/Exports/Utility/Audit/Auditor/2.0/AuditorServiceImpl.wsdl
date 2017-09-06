@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.ladbrokes.co.uk/service/utility/audit/Auditor/2.0" xmlns:jms="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:jndi="http://www.tibco.com/namespaces/ws/2004/soap/apis/jndi" targetNamespace="http://services.ladbrokes.co.uk/service/utility/audit/Auditor/2.0">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.ladbrokes.co.uk/service/utility/audit/Auditor/2.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:include schemaLocation="../../../../../../ServiceSchema/Utility/Audit/Auditor/2.0/AuditorService.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="AuditorPortType20">
+        <wsdl:port name="AuditorSOAPJMS" binding="tns:AuditorSOAPJMSBinding">
+            <soap:address location=""/>
+            <jndi:context>
+                <jndi:property name="java.naming.factory.initial" type="java.lang.String">com.tibco.tibjms.naming.TibjmsInitialContextFactory</jndi:property>
+                <jndi:property name="java.naming.provider.url" type="java.lang.String">tibjmsnaming://localhost:7222</jndi:property>
+            </jndi:context>
+            <jms:connectionFactory>QueueConnectionFactory</jms:connectionFactory>
+            <jms:targetAddress destination="queue">Ladbrokes.GBR.Service.Public.Request.Utility.Audit.Auditor.2</jms:targetAddress>
+        </wsdl:port>
+        <wsdl:port name="AuditorSOAPHTTP" binding="tns:AuditorSOAPHTTPBinding">
+            <soap:address location="http://localhost:5678/service/utility/audit/Auditor/2.0"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="AuditorPortType20">
+        <wsdl:operation name="notifyAuditor">
+            <wsdl:input message="tns:NotifyAuditorRequest"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="AuditorSOAPJMSBinding" type="tns:AuditorPortType20">
+        <soap:binding style="document" transport="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS"/>
+        <jms:binding messageFormat="Text"/>
+        <wsdl:operation name="notifyAuditor">
+            <soap:operation style="document" soapAction="http://services.ladbrokes.co.uk/service/utility/audit/Auditor/2.0/notifyAuditor"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="NotifyAuditorRequest"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="AuditorSOAPHTTPBinding" type="tns:AuditorPortType20">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="notifyAuditor">
+            <soap:operation style="document" soapAction="http://services.ladbrokes.co.uk/service/utility/audit/Auditor/2.0/notifyAuditor"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="NotifyAuditorRequest"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="NotifyAuditorRequest">
+        <wsdl:part name="NotifyAuditorRequest" element="tns:NotifyAuditorRequest"/>
+    </wsdl:message>
+</wsdl:definitions>

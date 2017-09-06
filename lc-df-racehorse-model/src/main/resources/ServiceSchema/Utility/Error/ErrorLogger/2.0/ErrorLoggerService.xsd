@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0"
+	 xmlns:els="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0"
+	 xmlns:cmnMsg="http://services.ladbrokes.co.uk/service/CommonMessage/2.0"
+	 xmlns:err="http://cdm.ladbrokes.co.uk/common/Error/2.0"
+	 targetNamespace="http://services.ladbrokes.co.uk/service/utility/error/ErrorLogger/2.0"
+	 version="2.0"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://cdm.ladbrokes.co.uk/common/Error/2.0" schemaLocation="../../../../../CDM/Error/2.0/Error.xsd"/>
+	<xs:import namespace="http://services.ladbrokes.co.uk/service/CommonMessage/2.0" schemaLocation="../../../../../CDM/CommonMessage/2.0/CommonMessage.xsd"/>
+	<xs:element name="NotifyErrorLoggerRequest" type="els:NotifyErrorLoggerRequest"/>
+	<xs:complexType name="NotifyErrorLoggerRequest">
+		<xs:sequence>
+			<xs:element name="notifyDateTime" type="xs:dateTime"  minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date and time the notification was created</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceRequestHeader" type="cmnMsg:ServiceHeader" minOccurs="0"/>
+			<xs:element name="serviceResponseHeader" type="cmnMsg:ServiceResponse" minOccurs="0"/>
+			<xs:element name="servicePayload" type="cmnMsg:Payload" minOccurs="0"/>
+			<xs:element name="errorProperties" type="err:ErrorProperties" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
